@@ -1,0 +1,7 @@
+# PLACEHOLDER: replace with the CFD lookup table.
+# roll_coeff_per_deg: roll moment coefficient (moment / (q * area * diameter)) per degree of deflection.
+mach,roll_coeff_per_deg
+0.0,0.0008
+0.8,0.0008
+1.0,0.0006
+1.5,0.0005
