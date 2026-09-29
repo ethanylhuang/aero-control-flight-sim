@@ -1,0 +1,54 @@
+# ============================================================================
+# EXAMPLE ROCKET. Every number below is a PLACEHOLDER: replace with the real ones.
+# Where to get each number is noted in the comments (mostly from OpenRocket).
+# Positions are measured from the NOSE TIP, pointing toward the tail (like OpenRocket).
+# ============================================================================
+
+[airframe]   # Everything EXCEPT the motor. In OpenRocket: set the motor to "none" and read the Rocket design / mass panel.
+name = "Example rocket"
+diameter_m = 0.0762
+length_m = 1.6
+dry_mass_kg = 2.2
+dry_cg_m = 0.95                      # center of gravity without motor
+dry_roll_inertia_kgm2 = 0.0025       # moment of inertia about the long axis
+dry_pitch_inertia_kgm2 = 0.45        # about the CG, perpendicular to the long axis
+
+[motor]
+file = "../../../data/AeroTech_HP-I500T.eng"   # thrustcurve.org RASP file
+aft_position_m = 1.6                 # nose tip to the back end of the motor
+
+[aero]       # Tables (aero.csv) come from OpenRocket's "Component analysis" / simulation plots.
+table = "aero.csv"
+roll_damping_coeff = -3.0            # Cl_p (negative). OpenRocket reports a roll damping coefficient.
+roll_disturbance_coeff = 0.001       # roll moment coeff with fins centered. Must come from CFD/tests: ASK THE TEAM.
+
+[control_fins]
+table = "control_fins.csv"           # CFD lookup: roll moment coefficient per degree of deflection
+max_deflection_deg = 10.0            # ASK THE TEAM
+max_rate_deg_s = 300.0               # servo speed. ASK THE TEAM
+
+[sensors]    # Flight computer sensor errors (typical hobby IMU numbers). ASK THE TEAM which IMU.
+gyro_noise_rad_s = 0.005
+gyro_bias_rad_s = 0.002
+accel_noise_ms2 = 0.2
+baro_noise_m = 0.5
+
+[launch]
+site_elevation_m = 0.0
+temperature_offset_k = 0.0           # difference from a standard 15 C day
+angle_deg = 5.0                      # tilt from vertical
+heading_deg = 90.0                   # compass direction of the tilt
+rail_length_m = 2.0
+
+[wind]
+speed_ms = 3.0                       # at reference height
+from_direction_deg = 270.0           # wind blowing FROM the west
+reference_height_m = 10.0
+shear_exponent = 0.14
+
+[simulation]
+time_step_s = 0.001
+control_rate_hz = 100.0
+random_seed = 1
+stop_at_apogee = true
+max_time_s = 120.0
